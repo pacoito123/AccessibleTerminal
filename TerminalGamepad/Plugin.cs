@@ -18,11 +18,11 @@ namespace TerminalGamepad
         private const string Name = "TerminalGamepad";
         private const string Version = "1.2.3";
 
-        private readonly Harmony harmony = new Harmony(GUID);
+        private readonly Harmony harmony = new(GUID);
         private static ModBase instance;
 
         private TerminalGUI myGUI;
-        private KeyBinds keybinds = new KeyBinds();
+        private readonly KeyBinds keybinds = new();
 
         public static ConfigEntry<string> BoxBackgroundColor;
         public static ConfigEntry<string> AmountBoxbackgroundColor;
@@ -43,7 +43,7 @@ namespace TerminalGamepad
         {
             instance = this;
             Logger.LogInfo("TermialGamepad has launched successfully! ENJOY :)");
-            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
+            _ = Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 
             TerminalStarted += OnTerminalBeginUsing;
 
@@ -67,19 +67,19 @@ namespace TerminalGamepad
             AmountButtonTextColor = Config.Bind("Text Colors", "Amount box text color", "24, 203, 0, 255", "The color of the amount box text");
 
 
-            BoxTextColor.SettingChanged += (s,e) => TerminalGUI.UpdateTextColor();
-            ButtonTextColor.SettingChanged += (s,e) => TerminalGUI.UpdateTextColor();
-            HighlightedButtonTextColor.SettingChanged += (s,e) => TerminalGUI.UpdateTextColor();
-            AmountButtonTextColor.SettingChanged += (s,e) => TerminalGUI.UpdateTextColor();
-            CustomCommads.SettingChanged += (s,e) => TerminalGUI.UpdateMainButtonNames();
-            PagesMode.SettingChanged += (s,e) => TerminalGUI.UpdatePagesMode();
+            BoxTextColor.SettingChanged += (s, e) => TerminalGUI.UpdateTextColor();
+            ButtonTextColor.SettingChanged += (s, e) => TerminalGUI.UpdateTextColor();
+            HighlightedButtonTextColor.SettingChanged += (s, e) => TerminalGUI.UpdateTextColor();
+            AmountButtonTextColor.SettingChanged += (s, e) => TerminalGUI.UpdateTextColor();
+            CustomCommads.SettingChanged += (s, e) => TerminalGUI.UpdateMainButtonNames();
+            PagesMode.SettingChanged += (s, e) => TerminalGUI.UpdatePagesMode();
         }
 
         private void OnTerminalBeginUsing(object sender, TerminalEventArgs e)
         {
             if (!GameObject.Find("TerminalGUI"))
             {
-                var gameObject = new UnityEngine.GameObject("TerminalGUI");
+                GameObject gameObject = new("TerminalGUI");
                 UnityEngine.Object.DontDestroyOnLoad(gameObject);
                 gameObject.hideFlags = HideFlags.HideAndDontSave;
                 gameObject.AddComponent<TerminalGUI>();
