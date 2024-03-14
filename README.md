@@ -1,4 +1,3 @@
-
 # TerminalGamepad
 ### This mod makes the controller able to write on the terminal with an on-screen panel.
 
