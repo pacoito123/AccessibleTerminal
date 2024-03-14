@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.1</TargetFrameworks>
         <AssemblyName>AccessibleTerminal</AssemblyName>
-        <Description></Description>
+        <Description>Execute just about any terminal command, without the use of a keyboard.</Description>
         <Version>1.0.0</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>

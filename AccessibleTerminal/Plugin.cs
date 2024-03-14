@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using System;
 using System.Reflection;
 
 namespace AccessibleTerminal
@@ -16,8 +17,17 @@ namespace AccessibleTerminal
         {
             StaticLogger = Logger;
 
-            Harmony harmony = new(PLUGIN_NAME);
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
+            try
+            {
+                Harmony harmony = new(PLUGIN_NAME);
+                harmony.PatchAll(Assembly.GetExecutingAssembly());
+
+                StaticLogger.LogInfo($"{PLUGIN_NAME} loaded!");
+            }
+            catch (Exception e)
+            {
+                StaticLogger.LogError($"Error while initializing {PLUGIN_NAME}: {e}");
+            }
         }
     }
 }
